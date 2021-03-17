@@ -1,15 +1,17 @@
+#!/usr/bin/env python3
+
 import sys
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 
 if len(sys.argv) < 2:
-    print('No given port number as command line argument: defaulting to 33000')
+    print('Not given port number: defaulting to localhost:33000')
     PORT = 33000
 else:
     try:
         PORT = int(sys.argv[1])
     except ValueError:
-        print('Enter a valid port number.')
+        print('Usage: ./server.py <PORT>')
         sys.exit(0)
 
 HOST = ''

@@ -1,17 +1,21 @@
+#!/usr/bin/env python3
+
+import sys
 import tkinter as tk
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 
-HOST = input('Enter host: ')
-PORT = input('Enter Port: ')
-
-if not HOST:
+if len(sys.argv) < 3:
+    print('Not given port number or host: defaulting to localhost:33000')
     HOST = '127.0.0.1'
-
-if not PORT:
     PORT = 33000
 else:
-    PORT = int(PORT)
+    try:
+        HOST = sys.argv[1]
+        PORT = int(sys.argv[2])
+    except ValueError:
+        print('Usage: ./client.py <HOST> <PORT>')
+        sys.exit(0)
 
 BUFFER = 1024
 ADDR = (HOST, PORT)
